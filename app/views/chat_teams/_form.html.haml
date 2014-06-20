@@ -1,0 +1,16 @@
+= form_for @chat_team do |f|
+  - if @chat_team.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@chat_team.errors.count, "error")} prohibited this chat_team from being saved:"
+      %ul
+        - @chat_team.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :user_id
+    = f.number_field :user_id
+  .actions
+    = f.submit 'Save'

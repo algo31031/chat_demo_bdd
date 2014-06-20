@@ -1,0 +1,20 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @chat_team.name
+%p
+  %b User:
+  = @chat_team.user_id
+
+#messages
+  - @chat_logs.each do |log|
+    %p= log.message
+
+= form_for ChatLog.new, url: { action: :chat, id: @chat_team.id } do |f|
+  = f.text_area :message
+  = f.submit "发言"
+
+= link_to 'Edit', edit_chat_team_path(@chat_team)
+\|
+= link_to 'Back', chat_teams_path

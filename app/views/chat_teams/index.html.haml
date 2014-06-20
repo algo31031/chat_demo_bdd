@@ -1,0 +1,21 @@
+%h1 Listing chat_teams
+
+%table
+  %tr
+    %th Name
+    %th User
+    %th
+    %th
+    %th
+
+  - @chat_teams.each do |chat_team|
+    %tr
+      %td= chat_team.name
+      %td= chat_team.user_id
+      %td= link_to 'Show', chat_team
+      %td= link_to 'Edit', edit_chat_team_path(chat_team)
+      %td= link_to 'Destroy', chat_team, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Chat team', new_chat_team_path
