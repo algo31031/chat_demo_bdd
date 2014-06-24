@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  resources :users
+  root to: "chat_teams#index"
+
+  resources :users, only: [:edit, :update, :destroy, :index, :show]
+  post 'login' => "users#login", as: :login
+  delete 'logout' => "users#logout", as: :logout
 
   resources :chat_teams 
-
   post 'chat_teams/:id/chat' => "chat_teams#chat"
 
   # The priority is based upon order of creation: first created -> highest priority.

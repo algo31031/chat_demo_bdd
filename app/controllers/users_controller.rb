@@ -12,11 +12,6 @@ class UsersController < ApplicationController
   def show
   end
 
-  # GET /users/new
-  def new
-    @user = User.new
-  end
-
   # GET /users/1/edit
   def edit
   end
@@ -61,6 +56,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def login
+    user = User.find_by(name: params[:user][:name])
+    user ||= User.create(user_params)
+    session[:user_id] = user.id
+
+    redirect_to root_path
+  end
+
+  def logout
+    session[:user_id] = nil
+
+    redirect_to root_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -69,6 +78,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :admin)
+      params.require(:user).permit(:name)
     end
 end

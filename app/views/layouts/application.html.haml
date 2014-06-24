@@ -1,0 +1,27 @@
+!!!
+%html
+  %head
+    %title ChatDemoBdd
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    .navbar.navbar-default.navbar-static-top{:role => "navigation"}
+      .container
+        .navbar-header
+          %a.navbar-brand{:href => "/"} Chat Demo
+        .navbar-collapse.collapse
+          %ul.nav.navbar-nav
+            %li
+              = link_to "聊天组", chat_teams_path
+          %ul.nav.navbar-nav.navbar-right
+            - if logined?
+              %li#user_name= link_to current_user.name, edit_user_path(current_user)
+              %li= link_to "登出", logout_path, method: :delete
+            - else
+              = form_for :user, url: login_path, method: :post, html: { class: "navbar-form"} do |f|
+                .form-group
+                  = f.text_field :name, class: "form-control", placeholder: "昵称"
+                  = submit_tag "登录", class: "btn btn-primary"          
+    .container              
+      = yield
