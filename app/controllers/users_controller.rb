@@ -57,8 +57,15 @@ class UsersController < ApplicationController
   end
 
   def login
-    user = User.find_by(name: params[:user][:name])
-    user ||= User.create(user_params)
+    unless user = User.find_by(name: params[:user][:name])
+      user = User.new(user_params)
+      unless user.save
+        flash[:error] = user.errors.full_messages.first
+        redirect_to root_path
+        return
+      end
+    end
+
     session[:user_id] = user.id
 
     redirect_to root_path

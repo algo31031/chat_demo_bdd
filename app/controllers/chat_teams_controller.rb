@@ -1,4 +1,5 @@
 class ChatTeamsController < ApplicationController
+  before_action :must_login, except: :index
   before_action :set_chat_team, only: [:show, :edit, :update, :destroy, :chat]
 
   def chat

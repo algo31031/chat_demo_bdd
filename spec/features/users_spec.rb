@@ -2,10 +2,14 @@ include UserMacros
 
 feature "用户功能" do
 
-  feature "普通用户"  do
+  context "普通用户"  do
 
     scenario "注册新用户并登陆" do
       visit root_path
+      expect {
+        login("")
+      }.not_to change(User, :count)
+      expect(page).to have_content("Name can't be blank")
       expect {
         login("banban")
       }.to change(User, :count).by(1)

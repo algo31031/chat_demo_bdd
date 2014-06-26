@@ -5,6 +5,15 @@ class ApplicationController < ActionController::Base
 
   helper_method :logined?, :current_user
 
+  protected
+
+  def must_login
+    unless logined?
+      flash[:error] = "请先登录"
+      redirect_to root_path
+      return 
+    end
+  end
 
   def logined?
     session[:user_id].present?
