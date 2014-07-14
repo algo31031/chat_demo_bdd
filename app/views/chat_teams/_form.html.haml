@@ -1,16 +1,27 @@
-= form_for @chat_team do |f|
+= form_for @chat_team, role: "form" do |f|
   - if @chat_team.errors.any?
+    = render "layout/common/errors", errors: @chat_team.errors
     #error_explanation
       %h2= "#{pluralize(@chat_team.errors.count, "error")} prohibited this chat_team from being saved:"
       %ul
         - @chat_team.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :user_id
-    = f.number_field :user_id
-  .actions
-    = f.submit 'Save'
+  .form-group
+    %label{ for: "chat_team_name" } 小组名称
+    = f.text_field :name, class: "form-control"
+
+  .form-group.members
+    %label{ for: "chat_team_name" } 小组成员
+    .checkbox
+      %label
+        = check_box_tag :owner, nil, true, disabled: true
+        = current_user.name    
+    - @users.each do |user|
+      .checkbox
+        %label
+          = check_box_tag :user_id, user.id, @chat_team.users.include?(user)
+          = user.name
+
+  = submit_tag "提交", class: "btn btn-primary"
+  = link_to "返回", chat_teams_path, class: "btn btn-default"        

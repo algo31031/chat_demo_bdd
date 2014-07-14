@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140620071808) do
+ActiveRecord::Schema.define(version: 20140714062147) do
 
   create_table "chat_logs", force: true do |t|
     t.string   "message"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 20140620071808) do
   create_table "chat_teams", force: true do |t|
     t.string   "name"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_chat_teams", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "chat_team_id"
+    t.boolean  "is_online"
+    t.boolean  "has_new_messga"
+    t.string   "faye_client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

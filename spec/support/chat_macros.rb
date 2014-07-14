@@ -2,10 +2,10 @@ module ChatMacros
 
   def choose_chat_team(chat_team)
     visit chat_teams_path
-    within "table" do 
+    within "ul.list-group" do 
       expect(page).to have_content chat_team.name
     end
-    click_link "Show"
+    click_link chat_team.name
     expect(page).to have_content chat_team.name
   end
 

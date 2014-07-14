@@ -1,11 +1,17 @@
+include UserMacros
 include ChatMacros
 
 feature "用户聊天" do 
 
-  # before :each do 
-  #   @tom = create :user, name: "Tom"
-  #   @jerry = create :user, name: "Jerry"
-  # end
+  background do
+    visit chat_teams_path
+  end  
+
+  let!(:user) { create :user }
+
+  before(:each) do
+    login user
+  end
 
   given(:team) { create :chat_team }
 

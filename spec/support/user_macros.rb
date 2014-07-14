@@ -9,4 +9,8 @@ module UserMacros
     click_button("登录")
   end
 
+  def logout
+    click_link("登出")
+  end
+
 end

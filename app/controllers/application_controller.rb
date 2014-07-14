@@ -16,12 +16,11 @@ class ApplicationController < ActionController::Base
   end
 
   def logined?
-    session[:user_id].present?
+    current_user.present?
   end
 
   def current_user
-    return nil unless logined?
-    @current_user ||= User.find session[:user_id]
+    @current_user ||= User.find_by_id session[:user_id]
   end
 
 end
