@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post 'login' => "users#login", as: :login
   delete 'logout' => "users#logout", as: :logout
 
-  resources :chat_teams 
+  resources :chat_teams, except: [:destroy]
   post 'chat_teams/:id/chat' => "chat_teams#chat"
 
   # The priority is based upon order of creation: first created -> highest priority.

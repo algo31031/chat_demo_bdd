@@ -53,13 +53,6 @@ class ChatTeamsController < ApplicationController
     end
   end
 
-  def destroy
-    @chat_team.destroy
-    respond_to do |format|
-      format.html { redirect_to chat_teams_url, notice: 'Chat team was successfully destroyed.' }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_chat_team
